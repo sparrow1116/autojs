@@ -1,0 +1,53 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+
+    </body>
+    <script>
+        var CycleTask = [
+            {
+                name:'com.kuaishou.nebula',
+                value:'rading',
+                time:20,
+                cycle:8,
+                file:'kuaishou'
+            },
+            {
+                name:'com.ss.android.ugc.aweme.lite',
+                value:'rading',
+                time:20,
+                cycle:2,
+                file:'douyin'
+            }
+        ];
+        var TimeTask = [
+            {
+                name:'com.ss.android.ugc.aweme.lite',
+                value:'renwu',
+                time:5,
+                file:'douyin'
+            }
+        ];
+
+        let newCycleTask = [];
+        function getCycleTask(taskList){
+            let hadPush = false;
+            let tempCycleTask = [];
+            for(let i = 0; i<taskList.length; i++){
+                if(taskList[i].cycle >= 1){
+                    taskList[i].cycle-- ;
+                    tempCycleTask.push(taskList[i]);
+                    newCycleTask.push(taskList[i]);
+                    hadPush = true;
+                }
+            }
+            if(hadPush){
+                getCycleTask(tempCycleTask);
+            }
+        }
+        getCycleTask(CycleTask);
+        console.log(newCycleTask)
+    </script>
+</html>
