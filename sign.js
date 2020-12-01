@@ -4,6 +4,9 @@ let douyin = new Douyin()
 var Kuaishou = require('./app/kuaishou.js')
 let kuaishou = new Kuaishou();
 
+var Shuabao = require('./app/shuabao.js')
+let shuabao = new Shuabao();
+
 var signTask = require('./task/signTask');
 
 var currentIndex = 0;
@@ -11,7 +14,7 @@ var taskTimer;
 
 global.w = floaty.window(
     <frame gravity='center' bg="#000000">
-        <text id='text'>悬浮的窗口</text>
+        <text id='text'  textColor='#ffffff'>悬浮的窗口</text>
     </frame>
 )
 
@@ -51,6 +54,9 @@ function doTask(task){
             break;
         case 'douyin':
             douyin[task.value]();
+            break;
+        case 'shuabao':
+            shuabao[task.value]();
             break;
         default:
             break;

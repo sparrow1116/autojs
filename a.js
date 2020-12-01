@@ -4,15 +4,34 @@ var Douyin = require('./app/douyin.js')
 let douyin = new Douyin()
 var Kuaishou = require('./app/kuaishou.js')
 let kuaishou = new Kuaishou();
+var Shuabao = require('./app/shuabao.js')
+let shuabao = new Shuabao();
 
 
 let taskArr = require('./task/getTask.js');
-let currentIndex = 0;
+
+
+let storage = storages.create('auto_task');
+
+let hour = new Date().getHours();
+let currentIndex;
+if(hour<8){
+    currentIndex = 0;
+}else{
+    let i = storage.get('index');
+    if(i){
+        currentIndex = i
+    }else{
+        currentIndex = 0;
+    }
+}
+//TODO 这个是测试用
+currentIndex = 0;
 let taskTimer;
 
 global.w = floaty.window(
     <frame gravity='center' bg="#000000">
-        <text id='text'>悬浮的窗口</text>
+        <text id='text' textColor='#ffffff'>悬浮的窗口</text>
     </frame>
 )
 kuaishou.addEvent('finish',(d)=>{
@@ -26,9 +45,17 @@ function taskFinish(){
     back();
     sleep(500);
     back();
+    sleep(500);
+    back();
+    sleep(500);
+    back();
+    sleep(500);
+    back();
+    sleep(500);
     console.log("finished>>>>>>")
     clearTimeout(taskTimer);
     currentIndex++;
+    storage.put('index',currentIndex + '');
     if(currentIndex >= taskArr.length){
         console.log('所有任务跑完')
         return;
@@ -37,6 +64,7 @@ function taskFinish(){
 }
 
 function doTask(task){
+
     taskTimer = setTimeout(()=>{
         taskFinish();
     },task.time * 60 * 1000);
@@ -47,11 +75,14 @@ function doTask(task){
         case 'douyin':
             douyin[task.value]();
             break;
+        case 'shuabao':
+            shuabao[task.value]();
+            break;
         default:
             break;
     }
 }
-
+console.log('>>>goto first task');
 doTask(taskArr[currentIndex]);
 
 
