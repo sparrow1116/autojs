@@ -1,20 +1,20 @@
 
-toast("hello auto")
 var Douyin = require('./app/douyin.js')
 let douyin = new Douyin()
 var Kuaishou = require('./app/kuaishou.js')
 let kuaishou = new Kuaishou();
 
+var signTask = require('./task/signTask');
 
-let taskArr = require('./task/getTask.js');
-let currentIndex = 0;
-let taskTimer;
+var currentIndex = 0;
+var taskTimer;
 
 global.w = floaty.window(
     <frame gravity='center' bg="#000000">
         <text id='text'>悬浮的窗口</text>
     </frame>
 )
+
 kuaishou.addEvent('finish',(d)=>{
     taskFinish();
 })
@@ -22,18 +22,23 @@ douyin.addEvent('finish',(d)=>{
     taskFinish();
 })
 
+
 function taskFinish(){
+    clearTimeout(taskTimer);
     back();
     sleep(500);
     back();
-    console.log("finished>>>>>>")
-    clearTimeout(taskTimer);
+    sleep(500);
+    back();
+    sleep(500);
+    back();
+    sleep(500);
     currentIndex++;
     if(currentIndex >= taskArr.length){
         console.log('所有任务跑完')
         return;
     }
-    doTask(taskArr[currentIndex]);
+    doTask(signTask[currentIndex])
 }
 
 function doTask(task){
@@ -52,45 +57,4 @@ function doTask(task){
     }
 }
 
-doTask(taskArr[currentIndex]);
-
-
-
-
-// for(let i = 0; i<taskArr.length; i++){
-//     switch(taskArr[i].file){
-//         case 'kuaishou':
-//             kuaishou[taskArr[i].value]();
-            
-//             break;
-//         case 'douyin':
-//             break;
-//         default:
-//             break;
-//     }
-// }
-
-
-
-// douyin.addEvent('hahh',()=>{
-    
-// })
-// console.log('>>> finish>>>');
-
-// var Gesture = require('./gesture.js')
-// console.log("start")
-// toast("hello auto")
-
-
-
-
-
-
-// launch("com.ss.android.ugc.aweme.lite");
-
-sleep(5000)
-
-// while(true){
-//     Gesture.swipeUp();
-//     sleep(random(6,19) * 1000);
-// }
+doTask(signTask[currentIndex]);
