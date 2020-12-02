@@ -12,7 +12,7 @@ Shuabao.prototype.sign = function(){
     ui.run(()=>{
         global.w.text.setText('进入刷宝:');
     })
-    Tool.sleep(7);
+    Tool.sleep(15);
     let list = id('com.jm.video:id/tv_tab_title').find();
     for(let i = 0; i<list.length; i++){
         if(list.get(i).text() && (list.get(i).text() == '任务' || list.get(i).text() == '福利')){
@@ -36,12 +36,12 @@ Shuabao.prototype.sign = function(){
     this.trigger('finish');
 }
 
-Shuabao.prototype.read = function(){
+Shuabao.prototype.renwu = function(){
     launch(this.pageName);
     ui.run(()=>{
         global.w.text.setText('进入刷宝:');
     })
-    Tool.sleep(7);
+    Tool.sleep(15);
     let list = id('com.jm.video:id/tv_tab_title').find();
     for(let i = 0; i<list.length; i++){
         if(list.get(i).text() && (list.get(i).text() == '任务' || list.get(i).text() == '福利')){
@@ -63,11 +63,16 @@ Shuabao.prototype.read = function(){
     while(hasRenwu()){
         readingRenwu();
     }
-    
-    Gesture.click(text('首页').findOne())
+    this.trigger('finish');
+}
+
+Shuabao.prototype.read = function(){
+    launch(this.pageName);
     ui.run(()=>{
-        global.w.text.setText('进入首页:');
+        global.w.text.setText('进入刷宝:');
     })
+    Tool.sleep(15);
+
     let time = 110;
     while(time > 0){
         ui.run(()=>{
@@ -83,8 +88,17 @@ Shuabao.prototype.read = function(){
 
 
 function hasRenwu(){
+    Gesture.dragUp(200);
+    ui.run(()=>{
+        global.w.text.setText('滑动页面:');
+    })
+    Tool.sleep(2)
+
+
+    console.log('>>>>>>>>>>>>>>>>hasRenwu>>>>>>')
     var c = text('领取').find();
-    if(c.size() > 0){
+    console.log('>>>>>hasRenwu> size >>>>>>>>' + c.size())
+    if(c.size() > 1){
         return true
     }else{
         return false
@@ -92,15 +106,16 @@ function hasRenwu(){
 }
 
 function readingRenwu(){
+    console.log('>>>>>>>>>>>>>>>>readingRenwu>>>>>>')
     var c = text('领取').find();
-    Gesture.click(c.get(0));
+    Gesture.click(c.get(0).parent());
     ui.run(()=>{
         global.w.text.setText('阅读任务视频:');
     })
-    Tool.sleep(39);
+    Tool.sleep(45);
     Gesture.click(id('com.jm.video:id/tt_video_ad_close_layout').findOne());
     closeDialog();
-    Tool.sleep(1);
+    Tool.sleep(2);
 }
 
 function closeDialog(){

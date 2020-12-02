@@ -1,18 +1,19 @@
 
 var CycleTask = [
-    {
-        name:'com.jm.video',
-        value:'read',
-        time:20,
-        cycle:8,
-        file:'shuabao'
-    },
+    
     {
         name:'com.kuaishou.nebula',
         value:'read',
         time:20,
         cycle:8,
         file:'kuaishou'
+    },
+    {
+        name:'com.jm.video',
+        value:'read',
+        time:20,
+        cycle:8,
+        file:'shuabao'
     },
     // {
     //     name:'com.ss.android.ugc.aweme.lite',

@@ -16,46 +16,57 @@ Kuaishou.prototype.read = function(){
         global.w.text.setText('进入快手:');
     })
     Tool.sleep(7);
-    reading();
+    let time = 150;
+    while(time >= 0){
+        reading();
+        time--;
+    }
+    this.trigger('finish');
 }
 
 Kuaishou.prototype.sign = function(){
-    launch(this.pageName);
-    ui.run(()=>{
-        global.w.text.setText('进入快手:');
+    let self= this;
+    this.currentThread = threads.start(function(){
+        console.log('>>>>>sign threads.start>>>>>>')
+        // launch(this.pageName);
+        ui.run(()=>{
+            global.w.text.setText('进入快手:');
+        })
+        Tool.sleep(7);
+        if(id('com.kuaishou.nebula:id/positive').find().size()>0){
+            id('com.kuaishou.nebula:id/positive').findOne().click();
+        }
+        sleep(1);
+        Gesture.swipeUp();
+        ui.run(()=>{
+            global.w.text.setText('阅读第二段视频:');
+        })
+        Tool.sleep(10);
+        Gesture.swipeUp();
+        ui.run(()=>{
+            global.w.text.setText('阅读第三段视频:');
+        })
+        Tool.sleep(10);
+        Gesture.swipeUp();
+        ui.run(()=>{
+            global.w.text.setText('阅读第四段视频:');
+        })
+        Tool.sleep(10);
+        // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>gogogogogo>>>>>>>')
+        // console.log(id('com.kuaishou.nebula:id/redFloat').findOne())
+        // let b = id('com.kuaishou.nebula:id/redFloat').findOne().bounds();
+        // click(b.centerX(),b.centerY());
+        Gesture.click(id('com.kuaishou.nebula:id/redFloat').findOne())
+        ui.run(()=>{
+            global.w.text.setText('进入任务页面:');
+        })
+        Tool.sleep(7)
+        // Gesture.click(text('立即签到').findOne());
+        Tool.sleep(1)
+        console.log('trgger finish>>>>>>')
+        self.trigger('finish');
     })
-    Tool.sleep(7);
-    if(id('com.kuaishou.nebula:id/positive').find().size()>0){
-        id('com.kuaishou.nebula:id/positive').findOne().click();
-    }
-    sleep(1);
-    Gesture.swipeUp();
-    ui.run(()=>{
-        global.w.text.setText('阅读第二段视频:');
-    })
-    Tool.sleep(10);
-    Gesture.swipeUp();
-    ui.run(()=>{
-        global.w.text.setText('阅读第三段视频:');
-    })
-    Tool.sleep(10);
-    Gesture.swipeUp();
-    ui.run(()=>{
-        global.w.text.setText('阅读第四段视频:');
-    })
-    Tool.sleep(10);
-    // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>gogogogogo>>>>>>>')
-    // console.log(id('com.kuaishou.nebula:id/redFloat').findOne())
-    // let b = id('com.kuaishou.nebula:id/redFloat').findOne().bounds();
-    // click(b.centerX(),b.centerY());
-    Gesture.click(id('com.kuaishou.nebula:id/redFloat').findOne())
-    ui.run(()=>{
-        global.w.text.setText('进入任务页面:');
-    })
-    Tool.sleep(7)
-    Gesture.click(text('立即签到').findOne());
-    sleep(1)
-    this.trigger('finish');
+    
 }
 
 

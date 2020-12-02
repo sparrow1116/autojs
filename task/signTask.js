@@ -1,10 +1,11 @@
 
 var TimeTask = [
+    
     {
-        name:'com.jm.video',
+        name:'com.kuaishou.nebula',
         value:'sign',
-        time:5,
-        file:'shuabao'
+        time:1,
+        file:'kuaishou'
     },
     {
         name:'com.ss.android.ugc.aweme.lite',
@@ -13,11 +14,12 @@ var TimeTask = [
         file:'douyin'
     },
     {
-        name:'com.kuaishou.nebula',
+        name:'com.jm.video',
         value:'sign',
-        time:5,
-        file:'kuaishou'
+        time:3,
+        file:'shuabao'
     }
+    
     
 ]
 

@@ -1,14 +1,16 @@
 
 toast("hello auto")
-var Douyin = require('./app/douyin.js')
-let douyin = new Douyin()
-var Kuaishou = require('./app/kuaishou.js')
-let kuaishou = new Kuaishou();
-var Shuabao = require('./app/shuabao.js')
-let shuabao = new Shuabao();
 
+let App = require('./initApp.js')
 
 let taskArr = require('./task/getTask.js');
+
+
+// Object.keys(App).forEach((key)=>{
+//     App[key].addEvent('finish',(d)=>{
+//         taskFinish();
+//     })
+// })
 
 
 let storage = storages.create('auto_task');
@@ -31,15 +33,13 @@ let taskTimer;
 
 global.w = floaty.window(
     <frame gravity='center' bg="#000000">
-        <text id='text' textColor='#ffffff'>悬浮的窗口</text>
+        <vertical paddig='18 8'>
+            <text id='task' textColor='#ffffff'>当前任务</text>
+            <text id='text' textColor='#ffffff'>悬浮的窗口</text>
+        </vertical>
+        
     </frame>
 )
-kuaishou.addEvent('finish',(d)=>{
-    taskFinish();
-})
-douyin.addEvent('finish',(d)=>{
-    taskFinish();
-})
 
 function taskFinish(){
     back();
@@ -54,6 +54,7 @@ function taskFinish(){
     sleep(500);
     console.log("finished>>>>>>")
     clearTimeout(taskTimer);
+    App[taskArr[currentIndex].file].removeEvent('finish')
     currentIndex++;
     storage.put('index',currentIndex + '');
     if(currentIndex >= taskArr.length){
@@ -64,64 +65,13 @@ function taskFinish(){
 }
 
 function doTask(task){
+    App[task.file].addEvent('finish',taskFinish);
+    global.w.task.setText(task.file + '-' + task.value + '  index:' + currentIndex);
 
     taskTimer = setTimeout(()=>{
         taskFinish();
     },task.time * 60 * 1000);
-    switch(task.file){
-        case 'kuaishou':
-            kuaishou[task.value]();
-            break;
-        case 'douyin':
-            douyin[task.value]();
-            break;
-        case 'shuabao':
-            shuabao[task.value]();
-            break;
-        default:
-            break;
-    }
+    App[task.file][task.value]();
 }
 console.log('>>>goto first task');
 doTask(taskArr[currentIndex]);
-
-
-
-
-// for(let i = 0; i<taskArr.length; i++){
-//     switch(taskArr[i].file){
-//         case 'kuaishou':
-//             kuaishou[taskArr[i].value]();
-            
-//             break;
-//         case 'douyin':
-//             break;
-//         default:
-//             break;
-//     }
-// }
-
-
-
-// douyin.addEvent('hahh',()=>{
-    
-// })
-// console.log('>>> finish>>>');
-
-// var Gesture = require('./gesture.js')
-// console.log("start")
-// toast("hello auto")
-
-
-
-
-
-
-// launch("com.ss.android.ugc.aweme.lite");
-
-sleep(5000)
-
-// while(true){
-//     Gesture.swipeUp();
-//     sleep(random(6,19) * 1000);
-// }
