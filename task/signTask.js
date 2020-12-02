@@ -4,7 +4,7 @@ var TimeTask = [
     {
         name:'com.kuaishou.nebula',
         value:'sign',
-        time:1,
+        time:3,
         file:'kuaishou'
     },
     {

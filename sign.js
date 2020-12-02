@@ -4,7 +4,8 @@ let Tool = require('./utils/tool.js')
 var taskArr = require('./task/signTask');
 
 var currentIndex = 0;
-var taskTimer;
+var ProtectThread;
+var isFinish = false;
 
 global.w = floaty.window(
     <frame gravity='center' bg="#000000">
@@ -15,59 +16,71 @@ global.w = floaty.window(
     </frame>
 )
 
-
 function taskFinish(){
-    // App[taskArr[currentIndex].file].currentThread
-    
-    console.log(">>>>>taskFinish>>>")
-    // threads.shutDownAll();
-    App[task.file].currentThread.exit();
-    App[taskArr[currentIndex].file].removeEvent('finish')
-    // clearTimeout(taskTimer);
-    back();
-    console.log('>>>>>>>>>>1')
-    Tool.sleep(1);
-    back();
-    console.log('>>>>>>>>>>2')
-    Tool.sleep(1);
-    back();
-    console.log('>>>>>>>>>>3')
-    Tool.sleep(1);
-    back();
-    console.log('>>>>>>>>>>4')
-    Tool.sleep(1);
-    
+    if(isFinish){
+        return;
+    }
+    isFinish = true;
+    Tool.closeApp( taskArr[currentIndex].name)
+    ui.run(()=>{
+        global.w.text.setText('关闭应用中:');
+    })
+    Tool.sleep(7);
+    // App[taskArr[currentIndex].file].removeEvent('finish')
+
     currentIndex++;
     if(currentIndex >= taskArr.length){
         console.log('所有任务跑完')
+        exit(); 
         return;
+    }else{
+        ui.run(()=>{
+            global.w.task.setText(task.file + '-' + task.value + '  index:' + currentIndex);
+            global.w.text.setText('下一个应用:');
+        })
+        doTask(taskArr[currentIndex])
     }
-    doTask(taskArr[currentIndex])
+    
 }
 
+var sum = events.emitter(threads.currentThread())
+sum.on('finish',function(s){
+    taskFinish();
+})
+
 function doTask(task){
+    console.log('>>>>doTask>>>>>>')
     let tt = task.time*60*1000;
-    console.log(tt);
-
     startProtectThread(tt);
-    // taskTimer = setTimeout(()=>{
-    //     console.log('>>>> on timer out')
-    //     taskFinish();
-    // },tt);
+    if(currentIndex >= 1){
+        App[taskArr[currentIndex - 1].file].currentThread.interrupt();
+    }
+    // App[task.file].addEvent('finish',taskFinish);
+    // ui.run(()=>{
+    //     global.w.task.setText(task.file + '-' + task.value + '  index:' + currentIndex);
+    // })
+    
 
-    App[task.file].addEvent('finish',taskFinish);
-    global.w.task.setText(task.file + '-' + task.value + '  index:' + currentIndex);
-    launch('com.kuaishou.nebula');
-    App[task.file][task.value]();
+    launch(task.name);
+    
+    App[task.file][task.value](sum);
+    isFinish = false;
+    
 }
 
 function startProtectThread(time){
-    var thread = threads.start(function(){
+    console.log('startProtectThread time::' + time)
+    
+    let tempTherad = threads.start(function(){
         setTimeout(()=>{
             console.log('>>>> on timer out')
             taskFinish();
         },time)
     })
+    if(ProtectThread){
+        ProtectThread.interrupt();
+    }
+    ProtectThread = tempTherad;
 }
 
 

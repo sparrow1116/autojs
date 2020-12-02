@@ -11,9 +11,6 @@ var Gesture = {
     dragUp(distance){
         let x = device.width/2 + random(-10,10);
         let y = device.height/2 + random(200,210);
-        console.log(x);
-        console.log(y)
-        console.log(distance)
         swipe(x,y,x,y-distance,500);
     }
 }

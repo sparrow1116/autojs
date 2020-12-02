@@ -23,9 +23,13 @@ let taskArr = []
     }
     getCycleTask(cycleTask);
     
+    // console.log('>>>>>newCycleTask>')
+    // console.log(newCycleTask)
     
     for(let i = 0; i<newCycleTask.length; i++){
-        
+        // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>')
+        // console.log(newCycleTask[i])
+        // console.log(timeTask)
         taskArr.push(newCycleTask[i]);
         taskArr = taskArr.concat(timeTask);
     }

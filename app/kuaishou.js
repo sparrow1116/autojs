@@ -9,22 +9,31 @@ function Kuaishou(){
 
 Kuaishou.prototype = new MyEvent()
 
-Kuaishou.prototype.read = function(){
-    console.log(TAG,'read');
-    launch(this.pageName);
-    ui.run(()=>{
-        global.w.text.setText('进入快手:');
-    })
-    Tool.sleep(7);
-    let time = 150;
-    while(time >= 0){
-        reading();
-        time--;
-    }
-    this.trigger('finish');
+Kuaishou.prototype.read = function(sum){
+    let self= this;
+    console.log('>>>>>Kuaishou.prototype.read')
+    this.currentThread = threads.start(function(){
+        ui.run(()=>{
+            global.w.text.setText('进入快手:');
+        })
+        Tool.sleep(7);
+        console.log('>>>>>>>>>>>>shit>>>>>')
+        let time = 150;
+        while(time >= 0){
+            console.log('>>>>>>>>>>>>>>1>>>>>>>')
+            reading();
+            console.log('>>>>>>>>>>>>>2>>>>>>>>')
+            console.log(time)
+            time--;
+        }
+        sum.emit('finish',1)
+        console.log('>>>>go to end')
+        // sum.setAndNotify(1);
+    });
+    
 }
 
-Kuaishou.prototype.sign = function(){
+Kuaishou.prototype.sign = function(sum){
     let self= this;
     this.currentThread = threads.start(function(){
         console.log('>>>>>sign threads.start>>>>>>')
@@ -60,11 +69,14 @@ Kuaishou.prototype.sign = function(){
         ui.run(()=>{
             global.w.text.setText('进入任务页面:');
         })
-        Tool.sleep(7)
-        // Gesture.click(text('立即签到').findOne());
+        Tool.sleep(10)
+        if(text('立即签到').find().size() > 0){
+            Gesture.click(text('立即签到').findOne());
+        }
         Tool.sleep(1)
         console.log('trgger finish>>>>>>')
-        self.trigger('finish');
+        sum.emit('finish',1)
+        // sum.setAndNotify(1);
     })
     
 }
@@ -78,7 +90,7 @@ function reading(){
         Tool.sleep(1);
         Gesture.swipeUp();
         Tool.sleep(1);
-        reading();
+        // reading();
     }else if(text('点击进入直播间').find().size()>0){
         ui.run(()=>{
             global.w.text.setText('点击进入直播间:');
@@ -86,7 +98,7 @@ function reading(){
         Tool.sleep(1);
         Gesture.swipeUp();
         Tool.sleep(1);
-        reading();
+        // reading();
     }else if(text('点击打开长图').find().size()>0){
         ui.run(()=>{
             global.w.text.setText('点击打开长图:');
@@ -94,7 +106,7 @@ function reading(){
         Tool.sleep(1);
         Gesture.swipeUp();
         Tool.sleep(1);
-        reading();
+        // reading();
     }else{
         ui.run(()=>{
             global.w.text.setText('正在阅读中:');
@@ -102,7 +114,7 @@ function reading(){
         Tool.sleep(random(2,18))
         Gesture.swipeUp();
         Tool.sleep(1);
-        reading();
+        // reading();
     }
     
 }
