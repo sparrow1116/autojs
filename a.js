@@ -34,6 +34,7 @@ global.w = floaty.window(
         
     </frame>
 )
+global.w.setPosition(device.width-460, -120);
 
 ui.run(()=>{         
     global.w.task.setText(taskArr[currentIndex].file + '-' + taskArr[currentIndex].value + '  index:' + currentIndex);
@@ -94,21 +95,16 @@ function doTask(task){
     startProtectThread(tt);
 
 
-    
-
-    // App[task.file].addEvent('finish',taskFinish);
     try{
         console.log('>>>>>>>>>>fuck>>>>>>>>>')
         if(currentIndex >= 1){
             App[taskArr[currentIndex - 1].file].currentThread.interrupt();
         }
-        // if(sum){
-        //     // sum.off('finish');
-        //     sum = null;
-        // }
+       
         console.log('>>>>>>>>>>0')
         // sleep(300); 
         launch(task.name);
+        isFinish = false;
         console.log('>>>>>>>>>>1')
         // sleep(300); 
         
@@ -120,9 +116,9 @@ function doTask(task){
         console.log(task.file)
         console.log(task.value)
         // console.log(task.file)
-        App[task.file][task.value](sum);
+        App[task.file][task.value](sum,task.count);
         console.log('>>>>>>>>>>4')
-        isFinish = false;
+        
         // sum.blockedGet()
         // taskFinish();
         // sleep(300);

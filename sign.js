@@ -62,9 +62,9 @@ function doTask(task){
     
 
     launch(task.name);
-    
-    App[task.file][task.value](sum);
     isFinish = false;
+    App[task.file][task.value](sum);
+    
     
 }
 

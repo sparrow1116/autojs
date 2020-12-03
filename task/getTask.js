@@ -27,11 +27,17 @@ let taskArr = []
     // console.log(newCycleTask)
     
     for(let i = 0; i<newCycleTask.length; i++){
-        // console.log('>>>>>>>>>>>>>>>>>>>>>>>>>>')
-        // console.log(newCycleTask[i])
-        // console.log(timeTask)
         taskArr.push(newCycleTask[i]);
-        taskArr = taskArr.concat(timeTask);
+        
+        for(let j = 0; j<timeTask.length;j++){
+            if(timeTask[j].cycle > 0){
+                timeTask[j].cycle--
+                taskArr.push(timeTask[j])
+            }
+        }
+
+        
+        // taskArr = taskArr.concat(timeTask);
     }
 // }else{
 //     let str = Storage.get('task');

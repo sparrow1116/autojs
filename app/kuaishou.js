@@ -9,7 +9,7 @@ function Kuaishou(){
 
 Kuaishou.prototype = new MyEvent()
 
-Kuaishou.prototype.read = function(sum){
+Kuaishou.prototype.read = function(sum,count){
     let self= this;
     console.log('>>>>>Kuaishou.prototype.read')
     this.currentThread = threads.start(function(){
@@ -18,13 +18,13 @@ Kuaishou.prototype.read = function(sum){
         })
         Tool.sleep(7);
         console.log('>>>>>>>>>>>>shit>>>>>')
-        let time = 150;
-        while(time >= 0){
+        count = count+30;
+        while(count >= 0){
             console.log('>>>>>>>>>>>>>>1>>>>>>>')
             reading();
             console.log('>>>>>>>>>>>>>2>>>>>>>>')
-            console.log(time)
-            time--;
+            console.log(count)
+            count--;
         }
         sum.emit('finish',1)
         console.log('>>>>go to end')

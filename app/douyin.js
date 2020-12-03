@@ -9,6 +9,24 @@ function Douyin(){
 
 Douyin.prototype = new MyEvent();
 
+Douyin.prototype.read = function(sum,count){
+    let self= this;
+    this.currentThread = threads.start(function(){
+        ui.run(()=>{
+            global.w.text.setText('进入抖音中:');
+        })
+        Tool.sleep(10);    
+        while(count >= 0){
+            ui.run(()=>{
+                global.w.text.setText('正在阅读中:');
+            })
+            Tool.sleep(random(2,18))
+            Gesture.swipeUp();
+            count--;
+        }
+        sum.emit('finish',1)
+    });
+}
 
 Douyin.prototype.sign = function(sum){
     let self= this;
@@ -54,27 +72,27 @@ Douyin.prototype.sign = function(sum){
         ui.run(()=>{
             global.w.text.setText('退出广告:');
         })
-        Tool.sleep(1);
+        Tool.sleep(3);
         if(text('金币每天凌晨左右自动兑换成现金').exists()){
             back();
             ui.run(()=>{
                 global.w.text.setText('退出广告:');
             })
-            Tool.sleep(1);
+            Tool.sleep(3);
         }
         if(text('金币每天凌晨左右自动兑换成现金').exists()){
             back();
             ui.run(()=>{
                 global.w.text.setText('退出广告:');
             })
-            Tool.sleep(1);
+            Tool.sleep(3);
         }
         if(text('金币每天凌晨左右自动兑换成现金').exists()){
             back();
             ui.run(()=>{
                 global.w.text.setText('退出广告:');
             })
-            Tool.sleep(1);
+            Tool.sleep(3);
         }
         sum.emit('finish',1)
     });

@@ -78,7 +78,7 @@ Shuabao.prototype.renwu = function(sum){
     
 }
 
-Shuabao.prototype.read = function(sum){
+Shuabao.prototype.read = function(sum,count){
     let self= this;
     this.currentThread = threads.start(function(){
         ui.run(()=>{
@@ -86,13 +86,12 @@ Shuabao.prototype.read = function(sum){
         })
         Tool.sleep(15);
     
-        let time = 110;
-        while(time > 0){
+        while(count > 0){
             ui.run(()=>{
                 global.w.text.setText('阅读视频:');
             })
             Tool.sleep(random(3,19))
-            time--;
+            count--;
             Gesture.swipeUp();
         }
         console.log('>>>>go to end')
