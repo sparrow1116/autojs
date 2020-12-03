@@ -41,16 +41,27 @@ Kuaishou.prototype.sign = function(sum){
         ui.run(()=>{
             global.w.text.setText('进入快手:');
         })
-        Tool.sleep(7);
+        Tool.sleep(10);
         if(id('com.kuaishou.nebula:id/positive').find().size()>0){
             id('com.kuaishou.nebula:id/positive').findOne().click();
+            ui.run(()=>{
+                global.w.text.setText('关闭儿童保护:');
+            })
+            Tool.sleep(1);
         }
-        sleep(1);
+       
         Gesture.swipeUp();
         ui.run(()=>{
             global.w.text.setText('阅读第二段视频:');
         })
         Tool.sleep(10);
+        if(id('com.kuaishou.nebula:id/positive').find().size()>0){
+            id('com.kuaishou.nebula:id/positive').findOne().click();
+            ui.run(()=>{
+                global.w.text.setText('关闭儿童保护:');
+            })
+            Tool.sleep(1);
+        }
         Gesture.swipeUp();
         ui.run(()=>{
             global.w.text.setText('阅读第三段视频:');
@@ -72,7 +83,22 @@ Kuaishou.prototype.sign = function(sum){
         Tool.sleep(10)
         if(text('立即签到').find().size() > 0){
             Gesture.click(text('立即签到').findOne());
+            ui.run(()=>{
+                global.w.text.setText('点击签到:');
+            })
+            Tool.sleep(1)
         }
+        if(text('立即签到').find().size() > 0){
+            Gesture.click(text('立即签到').findOne());
+            ui.run(()=>{
+                global.w.text.setText('点击签到:');
+            })
+            Tool.sleep(1)
+        }
+        back();
+        ui.run(()=>{
+            global.w.text.setText('返回:');
+        })
         Tool.sleep(1)
         console.log('trgger finish>>>>>>')
         sum.emit('finish',1)

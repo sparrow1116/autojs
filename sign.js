@@ -35,7 +35,7 @@ function taskFinish(){
         return;
     }else{
         ui.run(()=>{
-            global.w.task.setText(task.file + '-' + task.value + '  index:' + currentIndex);
+            global.w.task.setText(taskArr[currentIndex].file + '-' + taskArr[currentIndex].value + '  index:' + currentIndex);
             global.w.text.setText('下一个应用:');
         })
         doTask(taskArr[currentIndex])

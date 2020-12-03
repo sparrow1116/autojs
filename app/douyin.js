@@ -50,6 +50,32 @@ Douyin.prototype.sign = function(sum){
             global.w.text.setText('阅读签到广告:');
         })
         Tool.sleep(35);
+        back();
+        ui.run(()=>{
+            global.w.text.setText('退出广告:');
+        })
+        Tool.sleep(1);
+        if(text('金币每天凌晨左右自动兑换成现金').exists()){
+            back();
+            ui.run(()=>{
+                global.w.text.setText('退出广告:');
+            })
+            Tool.sleep(1);
+        }
+        if(text('金币每天凌晨左右自动兑换成现金').exists()){
+            back();
+            ui.run(()=>{
+                global.w.text.setText('退出广告:');
+            })
+            Tool.sleep(1);
+        }
+        if(text('金币每天凌晨左右自动兑换成现金').exists()){
+            back();
+            ui.run(()=>{
+                global.w.text.setText('退出广告:');
+            })
+            Tool.sleep(1);
+        }
         sum.emit('finish',1)
     });
     
