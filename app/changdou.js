@@ -1,6 +1,7 @@
 
 let Gesture = require('../utils/gesture.js');
-let Tool = require('../utils/tool.js')
+let Tool = require('../utils/tool.js');
+const { guid } = require('../utils/tool.js');
 
 function Changdou(){
     this.pageName = 'com.zf.shuashua'
@@ -12,6 +13,13 @@ Changdou.prototype.renwu = function(sum){
             global.w.text.setText('进入长豆中:');
         })
         Tool.sleep(20);
+        if(id('com.zf.shuashua:id/img_close').exists()){
+            Gesture.click(id('com.zf.shuashua:id/img_close').findOne())
+            ui.run(()=>{
+                global.w.text.setText('关闭邀请红包:');
+            })
+            Tool.sleep(2);
+        }
         if(className('android.widget.Button').exists() && className('android.widget.Button').findOne().clickable() == true){
             Gesture.click(className('android.widget.Button').findOne());
             ui.run(()=>{
@@ -58,6 +66,13 @@ Changdou.prototype.read = function(sum,count){
             global.w.text.setText('进入长豆中:');
         })
         Tool.sleep(20);
+        if(id('com.zf.shuashua:id/img_close').exists()){
+            Gesture.click(id('com.zf.shuashua:id/img_close').findOne())
+            ui.run(()=>{
+                global.w.text.setText('关闭邀请红包:');
+            })
+            Tool.sleep(2);
+        }
         if(className('android.widget.Button').exists() && className('android.widget.Button').findOne().clickable() == true){
             Gesture.click(className('android.widget.Button').findOne());
             ui.run(()=>{
@@ -133,6 +148,13 @@ Changdou.prototype.sign = function(sum){
             global.w.text.setText('进入长豆中:');
         })
         Tool.sleep(20);
+        if(id('com.zf.shuashua:id/img_close').exists()){
+            Gesture.click(id('com.zf.shuashua:id/img_close').findOne())
+            ui.run(()=>{
+                global.w.text.setText('关闭邀请红包:');
+            })
+            Tool.sleep(2);
+        }
         if(className('android.widget.Button').exists() && className('android.widget.Button').findOne().clickable() == true){
             Gesture.click(className('android.widget.Button').findOne());
             ui.run(()=>{

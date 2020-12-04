@@ -36,7 +36,7 @@ Douyin.prototype.sign = function(sum){
         })
         Tool.sleep(10);
         if(text('我知道了').find().size() > 0){
-            Gesture.click(id('com.ss.android.ugc.aweme.lite:id/dcx').findOne());
+            Gesture.click(text('我知道了').findOne());
         }
         Gesture.swipeUp();
         ui.run(()=>{
@@ -44,7 +44,7 @@ Douyin.prototype.sign = function(sum){
         })
         Tool.sleep(10)
         if(text('我知道了').find().size() > 0){
-            Gesture.click(id('com.ss.android.ugc.aweme.lite:id/dcx').findOne());
+            Gesture.click(text('我知道了').findOne());
         }
         Gesture.swipeUp();
         ui.run(()=>{
@@ -52,7 +52,7 @@ Douyin.prototype.sign = function(sum){
         })
         Tool.sleep(10)
         if(text('我知道了').find().size() > 0){
-            Gesture.click(id('com.ss.android.ugc.aweme.lite:id/dcx').findOne());
+            Gesture.click(text('我知道了').findOne());
         }
         // Gesture.swipeUp();
         // ui.run(()=>{
