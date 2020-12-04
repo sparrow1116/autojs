@@ -111,11 +111,12 @@ Douyin.prototype.renwu = function(sum){
             global.w.text.setText('进入抖音中:');
         })
         Tool.sleep(7);
-        Gesture.click(id('com.ss.android.ugc.aweme.lite:id/b88').findOne());
-        ui.run(()=>{
-            global.w.text.setText('进入抖音任务页面:');
-        })
-        Tool.sleep(7);
+        gotoRenwuPage();
+        // Gesture.click(id('com.ss.android.ugc.aweme.lite:id/b88').findOne());
+        // ui.run(()=>{
+        //     global.w.text.setText('进入抖音任务页面:');
+        // })
+        // Tool.sleep(7);
         Gesture.click(text('开宝箱得金币').findOne().parent());
         ui.run(()=>{
             global.w.text.setText('进入抖音开宝箱:');

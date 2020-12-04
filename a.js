@@ -34,7 +34,7 @@ global.w = floaty.window(
         
     </frame>
 )
-global.w.setPosition(device.width/2 -200, -100);
+global.w.setPosition(device.width/2 -200, -80);
 
 ui.run(()=>{         
     global.w.task.setText(taskArr[currentIndex].file + '-' + taskArr[currentIndex].value + '  index:' + currentIndex);

@@ -5,7 +5,7 @@ var CycleTask = [
         value:'read',
         time:20,
         cycle:8,
-        count:90,  
+        count:90,
         file:'changdou'
     },
     {
@@ -13,7 +13,7 @@ var CycleTask = [
         value:'read',
         time:20,
         cycle:8,
-        count:110,  
+        count:110,
         file:'shuabao'
     },
     {
@@ -29,7 +29,7 @@ var CycleTask = [
         value:'read',
         time:2,
         cycle:2,
-        count:9, 
+        count:9,
         file:'douyin'
     }
 ]
