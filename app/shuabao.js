@@ -132,7 +132,7 @@ function readingRenwu(){
     }
     
     ui.run(()=>{
-        global.w.text.setText('阅读任务视频:');
+        global.w.text.setText('进阅读任务了么:');
     })
     Tool.sleep(2);
     if(text('领取').exists()){
@@ -140,6 +140,10 @@ function readingRenwu(){
     }
     Tool.sleep(43);
     Gesture.click(id('com.jm.video:id/tt_video_ad_close_layout').findOne());
+    ui.run(()=>{
+        global.w.text.setText('关闭广告');
+    })
+    Tool.sleep(2);
     closeDialog();
     ui.run(()=>{
         global.w.text.setText('关闭弹窗:');

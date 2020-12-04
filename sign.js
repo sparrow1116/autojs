@@ -16,6 +16,8 @@ global.w = floaty.window(
     </frame>
 )
 
+global.w.setPosition(device.width/2 -200, -100);
+
 function taskFinish(){
     if(isFinish){
         return;

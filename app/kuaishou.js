@@ -93,7 +93,7 @@ Kuaishou.prototype.sign = function(sum){
             ui.run(()=>{
                 global.w.text.setText('点击签到:');
             })
-            Tool.sleep(1)
+            Tool.sleep(2)
         }
         back();
         ui.run(()=>{

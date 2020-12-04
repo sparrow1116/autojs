@@ -7,6 +7,12 @@ var TimeTask = [
         file:'changdou'
     },
     {
+        name:'com.jm.video',
+        value:'sign',
+        time:3,
+        file:'shuabao'
+    },
+    {
         name:'com.kuaishou.nebula',
         value:'sign',
         time:3,
@@ -17,12 +23,6 @@ var TimeTask = [
         value:'sign',
         time:3,
         file:'douyin'
-    },
-    {
-        name:'com.jm.video',
-        value:'sign',
-        time:3,
-        file:'shuabao'
     }
     
     
