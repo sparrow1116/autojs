@@ -25,7 +25,7 @@ Shuabao.prototype.sign = function(sum){
             global.w.text.setText('进入刷宝任务页:');
         })
         Tool.sleep(7);
-        if(text('邀请好友可立即提现').exists() && id('com.jm.video:id/imgClose').exists()){
+        if(id('com.jm.video:id/imgClose').exists()){
             Gesture.click(id('com.jm.video:id/imgClose').findOne())
             ui.run(()=>{
                 global.w.text.setText('关闭好友邀请:');

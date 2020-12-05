@@ -55,6 +55,7 @@ Changdou.prototype.read = function(sum,count){
             global.w.text.setText('进入长豆中:');
         })
         Tool.sleep(20);
+        // Tool.threeTimeProtect({text:'首页'},3);
         comeInAppClosePopup();
 
         while(count >= 0){
@@ -63,35 +64,50 @@ Changdou.prototype.read = function(sum,count){
             })
             // Tool.sleep(2);
             Tool.sleep(random(1,13))
+            let isFanbei = global.storage.get('changdou_fanbei');
+            if(isFanbei){
 
-            if(textContains('+').find().size() >= 2){
+            }else{
+                if(textContains('+').find().size() >= 2){
 
-                console.log('>>>>find container + >>')
-
-                Gesture.click(textContains('+').find().get(1));
-                ui.run(()=>{
-                    global.w.text.setText('进入看广告了么:');
-                })
-                Tool.sleep(5)
-                if(!id('com.zf.shuashua:id/layout_double').exists()){
+                    console.log('>>>>find container + >>')
+    
                     Gesture.click(textContains('+').find().get(1));
                     ui.run(()=>{
                         global.w.text.setText('进入看广告了么:');
                     })
-                    Tool.sleep(3)
+                    Tool.sleep(5)
+                    if(!id('com.zf.shuashua:id/layout_double').exists()){
+                        Gesture.click(textContains('+').find().get(1));
+                        ui.run(()=>{
+                            global.w.text.setText('进入看广告了么:');
+                        })
+                        Tool.sleep(3)
+                    }
+                    if(id('com.zf.shuashua:id/layout_double').exists()){
+                        Gesture.click(id('com.zf.shuashua:id/layout_double').findOne())
+                        ui.run(()=>{
+                            global.w.text.setText('检测是否进入广告:');
+                        })
+                        Tool.sleep(5)
+                        if(textContains('您今日的翻倍奖励次数已达上限').exists()){
+                            Gesture.click(id('com.zf.shuashua:id/img_close').findOne())
+                            ui.run(()=>{
+                                global.w.text.setText('关闭最高翻倍提示:');
+                            })
+                            global.storage.put("changdou_fanbei",true);
+                            Tool.sleep(2)
+                        }else{
+                            ui.run(()=>{
+                                global.w.text.setText('正在看广告:');
+                            })
+                            Tool.sleep(33);
+                            closeAd();
+                        }
+                    }
                 }
-                if(id('com.zf.shuashua:id/layout_double').exists()){
-                    Gesture.click(id('com.zf.shuashua:id/layout_double').findOne())
-                    ui.run(()=>{
-                        global.w.text.setText('正在看广告:');
-                    })
-                    Tool.sleep(38)
-                    closeAd();
-
-                }
-
-
             }
+            
             console.log('>>>>> goto swipeUp')
             Gesture.langSwipeUp();
             // Gesture.changdouSwipe(device.width/2,device.height/2)
@@ -131,6 +147,7 @@ Changdou.prototype.read = function(sum,count){
 
 Changdou.prototype.sign = function(sum){
     console.log('>>Changdou.prototype.sign')
+    global.storage.put('changdou_fanbei',false);
     this.currentThread = threads.start(function(){
         ui.run(()=>{
             global.w.text.setText('进入长豆中:');
@@ -246,44 +263,56 @@ function closeAd(){
             global.w.text.setText('关闭广告中:');
         })
         Tool.sleep(5)
+        
+    }else{
+        ui.run(()=>{
+            global.w.text.setText('再等一下广告:');
+        })
+        Tool.sleep(20)
+        back();
+        ui.run(()=>{
+            global.w.text.setText('返回上一页:');
+        })
+        Tool.sleep(2)
+    }
+
+    if(id('com.zf.shuashua:id/btTitle').exists()){
+        Gesture.click(id('com.zf.shuashua:id/btTitle').findOne());
+        ui.run(()=>{
+            global.w.text.setText('关闭二层广告中:');
+        })
+        Tool.sleep(3)
+
         if(id('com.zf.shuashua:id/btTitle').exists()){
             Gesture.click(id('com.zf.shuashua:id/btTitle').findOne());
             ui.run(()=>{
-                global.w.text.setText('关闭二层广告中:');
+                global.w.text.setText('再次关闭二层广告中:');
             })
             Tool.sleep(3)
+        }
 
+        if(!id('com.zf.shuashua:id/tab_make_money').exists()){
+            back()
+            ui.run(()=>{
+                global.w.text.setText('返回上一级:');
+            })
+            Tool.sleep(1)
+            back();
+            ui.run(()=>{
+                global.w.text.setText('返回上一级:');
+            })
+            Tool.sleep(1)
+            Gesture.click(id('com.zf.shuashua:id/btTitle').findOne());
+            ui.run(()=>{
+                global.w.text.setText('再次关闭二层广告中:');
+            })
+            Tool.sleep(3)
             if(id('com.zf.shuashua:id/btTitle').exists()){
                 Gesture.click(id('com.zf.shuashua:id/btTitle').findOne());
                 ui.run(()=>{
                     global.w.text.setText('再次关闭二层广告中:');
                 })
                 Tool.sleep(3)
-            }
-
-            if(!id('com.zf.shuashua:id/tab_make_money').exists()){
-                back()
-                ui.run(()=>{
-                    global.w.text.setText('返回上一级:');
-                })
-                Tool.sleep(1)
-                back();
-                ui.run(()=>{
-                    global.w.text.setText('返回上一级:');
-                })
-                Tool.sleep(1)
-                Gesture.click(id('com.zf.shuashua:id/btTitle').findOne());
-                ui.run(()=>{
-                    global.w.text.setText('再次关闭二层广告中:');
-                })
-                Tool.sleep(3)
-                if(id('com.zf.shuashua:id/btTitle').exists()){
-                    Gesture.click(id('com.zf.shuashua:id/btTitle').findOne());
-                    ui.run(()=>{
-                        global.w.text.setText('再次关闭二层广告中:');
-                    })
-                    Tool.sleep(3)
-                }
             }
         }
     }

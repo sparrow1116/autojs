@@ -18,12 +18,12 @@ var TimeTask = [
         time:3,
         file:'kuaishou'
     },
-    {
-        name:'com.ss.android.ugc.aweme.lite',
-        value:'sign',
-        time:3,
-        file:'douyin'
-    }
+    // {
+    //     name:'com.ss.android.ugc.aweme.lite',
+    //     value:'sign',
+    //     time:3,
+    //     file:'douyin'
+    // }
     
     
 ]

@@ -12,6 +12,10 @@ var Tool = {
             time--;
         }
     },
+    threeTimeProtect(obj,oneTimeSecond){
+        // let 
+
+    },
     closeApp(packageName) {
         // let packageName = currentPackage();
         app.openAppSetting(packageName);

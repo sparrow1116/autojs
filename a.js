@@ -5,14 +5,14 @@ let App = require('./initApp.js')
 let Tool = require('./utils/tool.js')
 let taskArr = require('./task/getTask.js');
 
-let storage = storages.create('auto_task');
+global.storage = storages.create('auto_task');
 
 let hour = new Date().getHours();
 let currentIndex;
 if(hour<8){
     currentIndex = 0;
 }else{
-    let i = storage.get('index');
+    let i = global.storage.get('index');
     if(i){
         currentIndex = i
     }else{
@@ -58,7 +58,7 @@ function taskFinish(){
         // App[taskArr[currentIndex].file].removeEvent('finish')
     // }
     currentIndex++;
-    storage.put('index',currentIndex + '');
+    global.storage.put('index',currentIndex + '');
     if(currentIndex >= taskArr.length){
         console.log('所有任务跑完')
         return;

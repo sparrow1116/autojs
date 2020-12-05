@@ -17,6 +17,7 @@ global.w = floaty.window(
 )
 
 global.w.setPosition(device.width/2 -200, -80);
+global.storage = storages.create('auto_task');
 
 function taskFinish(){
     if(isFinish){
