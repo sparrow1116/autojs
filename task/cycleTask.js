@@ -13,7 +13,7 @@ var CycleTask = [
         value:'read',
         time:20,
         cycle:8,
-        count:110,
+        count:100,
         file:'shuabao'
     },
     {
@@ -21,7 +21,7 @@ var CycleTask = [
         value:'read',               //任务动作名称
         time:20,                    //单次运行时间
         cycle:8,                    //整体运行次数
-        count:110,                  //单次动作重复次数
+        count:100,                  //单次动作重复次数
         file:'kuaishou'             //应用对应的文件
     },
     {

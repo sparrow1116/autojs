@@ -5,11 +5,11 @@ var Gesture = {
         device.width/2 + random(-10,10), device.height/2 - random(70,80),
         20)
     },
-    changdouSwipe(){
+    changdouSwipe(x,y){
         console.log('>>changdouSwipe>>')
-        swipe(device.width/2 + random(-10,10), device.height/2 + random(380,390),
-        device.width/2 + random(-10,10), device.height/2 - random(370,380),
-        200)
+        console.log(x);
+        console.log(y);
+        gesture(200,[x,y],[x,y-200],[x,y-250])
     },
     langSwipeUp(){
         console.log('>>langSwipeUp>>')

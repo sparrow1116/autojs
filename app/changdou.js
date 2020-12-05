@@ -13,20 +13,9 @@ Changdou.prototype.renwu = function(sum){
             global.w.text.setText('进入长豆中:');
         })
         Tool.sleep(20);
-        if(id('com.zf.shuashua:id/img_close').exists()){
-            Gesture.click(id('com.zf.shuashua:id/img_close').findOne())
-            ui.run(()=>{
-                global.w.text.setText('关闭邀请红包:');
-            })
-            Tool.sleep(2);
-        }
-        if(className('android.widget.Button').exists() && className('android.widget.Button').findOne().clickable() == true){
-            Gesture.click(className('android.widget.Button').findOne());
-            ui.run(()=>{
-                global.w.text.setText('关闭邀请弹框:');
-            })
-            Tool.sleep(2);
-        }
+        
+        comeInAppClosePopup();
+
         Gesture.click(id('com.zf.shuashua:id/tab_make_money').findOne())
         ui.run(()=>{
             global.w.text.setText('进入任务页:');
@@ -66,26 +55,14 @@ Changdou.prototype.read = function(sum,count){
             global.w.text.setText('进入长豆中:');
         })
         Tool.sleep(20);
-        if(id('com.zf.shuashua:id/img_close').exists()){
-            Gesture.click(id('com.zf.shuashua:id/img_close').findOne())
-            ui.run(()=>{
-                global.w.text.setText('关闭邀请红包:');
-            })
-            Tool.sleep(2);
-        }
-        if(className('android.widget.Button').exists() && className('android.widget.Button').findOne().clickable() == true){
-            Gesture.click(className('android.widget.Button').findOne());
-            ui.run(()=>{
-                global.w.text.setText('关闭邀请弹框:');
-            })
-            Tool.sleep(2);
-        }
+        comeInAppClosePopup();
 
         while(count >= 0){
             ui.run(()=>{
                 global.w.text.setText('正在阅读中:');
             })
-            Tool.sleep(random(2,17))
+            // Tool.sleep(2);
+            Tool.sleep(random(1,13))
 
             if(textContains('+').find().size() >= 2){
 
@@ -117,21 +94,33 @@ Changdou.prototype.read = function(sum,count){
             }
             console.log('>>>>> goto swipeUp')
             Gesture.langSwipeUp();
+            // Gesture.changdouSwipe(device.width/2,device.height/2)
+            // id('com.zf.shuashua:id/container').findOne().scollUp();
+
             ui.run(()=>{
-                global.w.text.setText('翻页:');
+                global.w.text.setText('翻页检测:');
             })
-            Tool.sleep(2)
+            Tool.sleep(4)
             if(!id('com.zf.shuashua:id/tab_make_money').exists()){
                 back()
                 ui.run(()=>{
                     global.w.text.setText('返回上一级:');
                 })
-                Tool.sleep(1)
-                back()
-                ui.run(()=>{
-                    global.w.text.setText('返回上一级:');
-                })
-                Tool.sleep(1)
+                Tool.sleep(2)
+                if(!id('com.zf.shuashua:id/tab_make_money').exists()){
+                    back()
+                    ui.run(()=>{
+                        global.w.text.setText('返回上一级:');
+                    })
+                    Tool.sleep(2)
+                }
+                if(!id('com.zf.shuashua:id/tab_make_money').exists()){
+                    back()
+                    ui.run(()=>{
+                        global.w.text.setText('返回上一级:');
+                    })
+                    Tool.sleep(2)
+                }
             }
             count--;
         }
@@ -140,7 +129,6 @@ Changdou.prototype.read = function(sum,count){
     });
 }
 
-
 Changdou.prototype.sign = function(sum){
     console.log('>>Changdou.prototype.sign')
     this.currentThread = threads.start(function(){
@@ -148,20 +136,7 @@ Changdou.prototype.sign = function(sum){
             global.w.text.setText('进入长豆中:');
         })
         Tool.sleep(20);
-        if(id('com.zf.shuashua:id/img_close').exists()){
-            Gesture.click(id('com.zf.shuashua:id/img_close').findOne())
-            ui.run(()=>{
-                global.w.text.setText('关闭邀请红包:');
-            })
-            Tool.sleep(2);
-        }
-        if(className('android.widget.Button').exists() && className('android.widget.Button').findOne().clickable() == true){
-            Gesture.click(className('android.widget.Button').findOne());
-            ui.run(()=>{
-                global.w.text.setText('关闭邀请弹框:');
-            })
-            Tool.sleep(2);
-        }
+        comeInAppClosePopup();
 
         Gesture.click(id('com.zf.shuashua:id/tab_make_money').findOne())
         ui.run(()=>{
@@ -207,6 +182,24 @@ Changdou.prototype.sign = function(sum){
     })
 
 
+}
+
+
+function comeInAppClosePopup(){
+    if(id('com.zf.shuashua:id/img_close').exists()){
+        Gesture.click(id('com.zf.shuashua:id/img_close').findOne())
+        ui.run(()=>{
+            global.w.text.setText('关闭邀请红包:');
+        })
+        Tool.sleep(2);
+    }
+    if(className('android.widget.Button').exists() && className('android.widget.Button').findOne().clickable() == true){
+        Gesture.click(className('android.widget.Button').findOne());
+        ui.run(()=>{
+            global.w.text.setText('关闭邀请弹框:');
+        })
+        Tool.sleep(2);
+    }
 }
 
 function renwuPagePopup(){
