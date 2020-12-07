@@ -27,15 +27,14 @@ let taskArr = []
     // console.log(newCycleTask)
     
     for(let i = 0; i<newCycleTask.length; i++){
-        taskArr.push(newCycleTask[i]);
         
+        taskArr.push(newCycleTask[i]);
         for(let j = 0; j<timeTask.length;j++){
             if(timeTask[j].cycle > 0){
                 timeTask[j].cycle--
                 taskArr.push(timeTask[j])
             }
         }
-
         
         // taskArr = taskArr.concat(timeTask);
     }

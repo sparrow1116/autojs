@@ -33,6 +33,23 @@ Shuabao.prototype.sign = function(sum){
             Tool.sleep(1);
         }
         Gesture.click(text('立即签到').findOne());
+        Tool.sleep(3);
+        if(text('看视频签到').exists()){
+            Gesture.click(text('看视频签到').findOne())
+            ui.run(()=>{
+                global.w.text.setText('看签到视频中:');
+            })
+            Tool.sleep(30);
+        }
+        if(id('com.jm.video:id/tt_video_ad_close_layout').exists()){
+            Gesture.click(id('com.jm.video:id/tt_video_ad_close_layout').findOne());
+        }
+        if(id('com.jm.video:id/iv_close').exists()){
+            Gesture.click(id('com.jm.video:id/iv_close').findOne());
+        }
+        ui.run(()=>{
+            global.w.text.setText('关闭广告:');
+        })
         Tool.sleep(2);
         // sum.setAndNotify(1);
         sum.emit('finish',1)
@@ -59,7 +76,7 @@ Shuabao.prototype.renwu = function(sum){
             global.w.text.setText('进入刷宝任务页:');
         })
         Tool.sleep(7);
-        if(text('邀请好友可立即提现').exists() && id('com.jm.video:id/imgClose').exists()){
+        if(id('com.jm.video:id/imgClose').exists()){
             Gesture.click(id('com.jm.video:id/imgClose').findOne())
             ui.run(()=>{
                 global.w.text.setText('关闭好友邀请:');
@@ -138,8 +155,16 @@ function readingRenwu(){
     if(text('领取').exists()){
         return;
     }
+    ui.run(()=>{
+        global.w.text.setText('阅读任务:');
+    })
     Tool.sleep(43);
-    Gesture.click(id('com.jm.video:id/tt_video_ad_close_layout').findOne());
+    if(id('com.jm.video:id/tt_video_ad_close_layout').exists()){
+        Gesture.click(id('com.jm.video:id/tt_video_ad_close_layout').findOne());
+    }
+    if(id('com.jm.video:id/iv_close').exists()){
+        Gesture.click(id('com.jm.video:id/iv_close').findOne());
+    }
     ui.run(()=>{
         global.w.text.setText('关闭广告');
     })

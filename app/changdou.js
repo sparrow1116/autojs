@@ -166,8 +166,8 @@ Changdou.prototype.sign = function(sum){
         ui.run(()=>{
             global.w.text.setText('进入长豆中:');
         })
-        Tool.sleep(13);
-        Tool.threeTimeWait({key:'text',value:'首页',has:true},3);
+        Tool.sleep(20);
+        // Tool.threeTimeWait({key:'text',value:'首页',has:true},3);
         comeInAppClosePopup();
 
         Gesture.click(id('com.zf.shuashua:id/tab_make_money').findOne())
@@ -278,6 +278,30 @@ function closeDoubleAd(){
     Tool.sleep(5);
 }
 
+
+let newAdCount = 0;
+
+function closeNewAd(){
+    if(className('android.widget.ImageView').exists() && className('android.widget.ImageView').findOne().clickable() == true){
+        Gesture.click(className('android.widget.ImageView').findOne())
+        ui.run(()=>{
+            global.w.text.setText('返回上一页:');
+        })
+        Tool.sleep(2)
+    }else{
+        ui.run(()=>{
+            global.w.text.setText('再等一下广告:');
+        })
+        Tool.sleep(3)
+        if(newAdCount >= 5){
+            return
+        }
+        newAdCount++
+        closeNewAd()
+    }
+}
+
+
 function closeAd(){
     if(!id('com.zf.shuashua:id/tt_video_ad_close_layout').exists() && !id('com.zf.shuashua:id/mimo_reward_close_img').exists()){
         ui.run(()=>{
@@ -310,15 +334,8 @@ function closeAd(){
         Tool.sleep(5)
         
     }else{
-        ui.run(()=>{
-            global.w.text.setText('再等一下广告:');
-        })
-        Tool.sleep(5)
-        back();
-        ui.run(()=>{
-            global.w.text.setText('返回上一页:');
-        })
-        Tool.sleep(2)
+        newAdCount = 0;
+        closeNewAd(); 
     }
 
     Tool.threeTimeWait({key:'id',value:'com.zf.shuashua:id/btTitle',has:true},3)
