@@ -30,6 +30,7 @@ global.w = floaty.window(
         <vertical paddig='18 8'>
             <text id='task' textColor='#ffffff'>当前任务</text>
             <text id='text' textColor='#ffffff'>悬浮的窗口</text>
+            <text id='subtext' textColor='#ffffff'></text>
         </vertical>
         
     </frame>
