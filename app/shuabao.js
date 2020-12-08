@@ -39,7 +39,7 @@ Shuabao.prototype.sign = function(sum){
             ui.run(()=>{
                 global.w.text.setText('看签到视频中:');
             })
-            Tool.sleep(30);
+            Tool.sleep(40);
         }
         if(id('com.jm.video:id/tt_video_ad_close_layout').exists()){
             Gesture.click(id('com.jm.video:id/tt_video_ad_close_layout').findOne());

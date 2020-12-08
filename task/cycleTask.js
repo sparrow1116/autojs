@@ -24,14 +24,14 @@ var CycleTask = [
         count:100,                  //单次动作重复次数
         file:'kuaishou'             //应用对应的文件
     },
-    {
-        name:'com.ss.android.ugc.aweme.lite',
-        value:'read',
-        time:4,
-        cycle:2,
-        count:9,
-        file:'douyin'
-    }
+    // {
+    //     name:'com.ss.android.ugc.aweme.lite',
+    //     value:'read',
+    //     time:4,
+    //     cycle:2,
+    //     count:9,
+    //     file:'douyin'
+    // }
 ]
 
 module.exports = CycleTask;

@@ -13,8 +13,8 @@ var Gesture = {
     },
     langSwipeUp(){
         console.log('>>langSwipeUp>>')
-        swipe(device.width/2 + random(-10,10), device.height - random(300,400),
-        device.width/2 + random(-10,10), random(400,500),
+        swipe(device.width/2 + random(-10,10), device.height - random(450,550),
+        device.width/2 + random(-10,10), random(300,400),
         700)
     },
     click(obj){

@@ -284,10 +284,13 @@ let newAdCount = 0;
 function closeNewAd(){
     if(className('android.widget.ImageView').exists() && className('android.widget.ImageView').findOne().clickable() == true){
         Gesture.click(className('android.widget.ImageView').findOne())
+        className('android.widget.ImageView').find().forEach(function(view){
+            view.click()
+        });
         ui.run(()=>{
             global.w.text.setText('返回上一页:');
         })
-        Tool.sleep(2)
+        Tool.sleep(3)
     }else{
         ui.run(()=>{
             global.w.text.setText('再等一下广告:');
@@ -340,6 +343,14 @@ function closeAd(){
 
     Tool.threeTimeWait({key:'id',value:'com.zf.shuashua:id/btTitle',has:true},3)
 
+    // if(!id('com.zf.shuashua:id/btTitle').exists()){
+    //     back();
+    //     ui.run(()=>{
+    //         global.w.text.setText('返回上一层:');
+    //     })
+    //     Tool.sleep(2)
+    // }
+
     if(id('com.zf.shuashua:id/btTitle').exists()){
         Gesture.click(id('com.zf.shuashua:id/btTitle').findOne());
         ui.run(()=>{
@@ -382,29 +393,45 @@ function closeAd(){
         //     has:false
         // },1)
         if(!id('com.zf.shuashua:id/tab_make_money').exists()){
-            back()
-            ui.run(()=>{
-                global.w.text.setText('返回上一级:');
-            })
-            Tool.sleep(1)
-            back();
-            ui.run(()=>{
-                global.w.text.setText('返回上一级:');
-            })
-            Tool.sleep(1)
-            Gesture.click(id('com.zf.shuashua:id/btTitle').findOne());
-            ui.run(()=>{
-                global.w.text.setText('再次关闭二层广告中:');
-            })
-            Tool.sleep(2)
-            Tool.threeTimeClick({
-                key:'id',
-                value:'com.zf.shuashua:id/btTitle'
-            },{
-                key:'id',
-                value:'com.zf.shuashua:id/btTitle',
-                has:true
-            },2)
+            
+            if(!id('com.zf.shuashua:id/tab_make_money').exists()){
+                back()
+                ui.run(()=>{
+                    global.w.text.setText('返回上弹层:');
+                })
+                Tool.sleep(1)
+            }
+            if(!id('com.zf.shuashua:id/tab_make_money').exists()){
+                back()
+                ui.run(()=>{
+                    global.w.text.setText('再次上一级:');
+                })
+                Tool.sleep(1)
+            }
+            if(!id('com.zf.shuashua:id/tab_make_money').exists()){
+                back()
+                ui.run(()=>{
+                    global.w.text.setText('三次上一级:');
+                })
+                Tool.sleep(1)
+            }
+
+            if(id('com.zf.shuashua:id/btTitle').exists()){
+                Gesture.click(id('com.zf.shuashua:id/btTitle').findOne());
+                ui.run(()=>{
+                    global.w.text.setText('再次关闭二层广告中:');
+                })
+                Tool.sleep(2)
+                Tool.threeTimeClick({
+                    key:'id',
+                    value:'com.zf.shuashua:id/btTitle'
+                },{
+                    key:'id',
+                    value:'com.zf.shuashua:id/btTitle',
+                    has:true
+                },2)
+            }
+            
             
             // Tool.threeTimeWait({
             //     key:'id',
