@@ -98,7 +98,10 @@ var Tool = {
                 }
                 break;
         }
-        global.w.subtext.setText('');
+        ui.run(()=>{
+            global.w.subtext.setText('');
+        })
+        
     },
     threeTimeWait(obj,oneTimeSecond){
         let key = obj.key?obj.key : 'text'
@@ -168,7 +171,10 @@ var Tool = {
                 }
                 break;
         }
-        global.w.subtext.setText('');
+        ui.run(()=>{
+            global.w.subtext.setText('');
+        })
+        
     },
     closeApp(packageName) {
         // let packageName = currentPackage();
